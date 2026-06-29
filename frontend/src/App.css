@@ -1,0 +1,1088 @@
+/* ============================================================
+   Royal Mughal Palace — Saniya & Mubeen Wedding Invite
+   Palette: Deep Emerald + Royal Gold
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap");
+
+:root {
+  --emerald-900: #06291f;
+  --emerald-800: #0a3b2d;
+  --emerald-700: #0e4a39;
+  --emerald-600: #145a47;
+  --gold: #d4af37;
+  --gold-soft: #e9c971;
+  --gold-bright: #f4d160;
+  --cream: #f5ecd2;
+  --ink: #1a1a1a;
+}
+
+/* ---------- Audio toggle (top-right) ---------- */
+.audio-toggle {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: linear-gradient(180deg, rgba(6,32,24,0.95), rgba(4,21,15,0.95));
+  color: var(--gold-bright);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.2);
+  transition: transform .25s ease, box-shadow .25s ease, color .25s ease;
+}
+.audio-toggle:hover {
+  transform: translateY(-2px);
+  color: #fff7d6;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 24px rgba(212,175,55,0.35);
+}
+.audio-toggle.is-playing { color: #fff7d6; border-color: var(--gold-bright); }
+.audio-label { line-height: 1; }
+.audio-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  margin-left: 2px;
+}
+.audio-eq i {
+  width: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  height: 4px;
+  opacity: 0.5;
+}
+.audio-eq.active i { animation: eq 1s ease-in-out infinite; }
+.audio-eq.active i:nth-child(1) { animation-delay: 0s; }
+.audio-eq.active i:nth-child(2) { animation-delay: 0.18s; }
+.audio-eq.active i:nth-child(3) { animation-delay: 0.36s; }
+.audio-eq.active i:nth-child(4) { animation-delay: 0.54s; }
+@keyframes eq {
+  0%, 100% { height: 4px; opacity: 0.45; }
+  50%      { height: 14px; opacity: 1; }
+}
+@media (max-width: 520px) {
+  .audio-toggle { padding: 9px 12px; font-size: 0; gap: 6px; }
+  .audio-label { display: none; }
+}
+
+/* ---------- Hearts ---------- */
+.hearts-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.heart-float {
+  position: absolute;
+  bottom: -24px;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(212,175,55,0.45));
+  animation: heart-rise linear infinite;
+}
+@keyframes heart-rise {
+  0%   { transform: translateY(0) rotate(-6deg) scale(0.8); opacity: 0; }
+  15%  { opacity: 0.95; }
+  50%  { transform: translateY(-50vh) translateX(12px) rotate(6deg) scale(1); }
+  85%  { opacity: 0.7; }
+  100% { transform: translateY(-100vh) translateX(-8px) rotate(-6deg) scale(0.7); opacity: 0; }
+}
+.amp-heart {
+  display: inline-flex;
+  color: #ff8aa2;
+  filter: drop-shadow(0 0 10px rgba(255,138,162,0.55));
+}
+
+html, body {
+  background: var(--emerald-900);
+  color: var(--cream);
+}
+
+* { box-sizing: border-box; }
+
+.royal-root {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, var(--emerald-700) 0%, var(--emerald-900) 70%) fixed;
+  color: var(--cream);
+  font-family: "Cormorant Garamond", serif;
+  overflow-x: hidden;
+}
+
+/* ---------- HERO + PALACE GATES ---------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(212,175,55,0.18), transparent 55%),
+    radial-gradient(circle at 50% 90%, rgba(0,0,0,0.55), transparent 60%),
+    linear-gradient(180deg, #082a20 0%, #04150f 100%);
+}
+
+/* floating particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.particle {
+  position: absolute;
+  bottom: -10px;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  box-shadow: 0 0 8px var(--gold-bright);
+  opacity: 0;
+  animation: float-up linear infinite;
+}
+@keyframes float-up {
+  0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+  15%  { opacity: 0.9; }
+  85%  { opacity: 0.8; }
+  100% { transform: translateY(-105vh) scale(1.1); opacity: 0; }
+}
+
+/* shimmer sweep for names */
+.shimmer {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-bright) 40%,
+    #fff7d6 50%,
+    var(--gold-bright) 60%,
+    var(--gold) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 4.5s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0%, 100% { background-position: 200% 0; }
+  50%      { background-position: -50% 0; }
+}
+
+/* subtle stars */
+.hero-bg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(244,209,96,0.7), transparent 50%),
+    radial-gradient(1px 1px at 78% 18%, rgba(244,209,96,0.55), transparent 50%),
+    radial-gradient(1px 1px at 30% 80%, rgba(244,209,96,0.5), transparent 50%),
+    radial-gradient(1px 1px at 65% 65%, rgba(244,209,96,0.6), transparent 50%),
+    radial-gradient(1px 1px at 90% 45%, rgba(244,209,96,0.55), transparent 50%),
+    radial-gradient(1px 1px at 8% 60%, rgba(244,209,96,0.45), transparent 50%);
+  opacity: 0.8;
+}
+
+.hero-foreground { position: absolute; inset: 0; pointer-events: none; }
+
+.hero-arch-frame {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(86vw, 720px);
+  height: min(92vh, calc(min(86vw, 720px) * 1.25), 880px);
+  border: 2px solid var(--gold);
+  border-radius: 50% 50% 6px 6px / 30% 30% 6px 6px;
+  box-shadow:
+    inset 0 0 0 6px rgba(0,0,0,0.4),
+    inset 0 0 0 8px var(--gold-soft),
+    0 0 80px rgba(212,175,55,0.25);
+  background: transparent;
+}
+
+/* gates */
+.gates-wrapper {
+  position: relative;
+  width: min(86vw, 720px);
+  height: min(92vh, calc(min(86vw, 720px) * 1.25), 880px);
+  display: flex;
+  perspective: 1600px;
+}
+
+.gate {
+  flex: 1;
+  position: relative;
+  background:
+    linear-gradient(180deg, #0a3b2d 0%, #052218 100%);
+  border: 1px solid var(--gold);
+  transition: transform 1.6s cubic-bezier(.7,.02,.2,1), box-shadow 1.6s;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.6),
+    inset 0 0 0 3px rgba(212,175,55,0.35);
+  transform-origin: left center;
+}
+
+.gate-left {
+  transform-origin: left center;
+  border-radius: 50% 0 0 0 / 30% 0 0 0;
+}
+.gate-right {
+  transform-origin: right center;
+  border-radius: 0 50% 0 0 / 0 30% 0 0;
+}
+
+.gate-left.gate-open  { transform: rotateY(-110deg); box-shadow: -40px 0 60px rgba(0,0,0,0.5); }
+.gate-right.gate-open { transform: rotateY(110deg);  box-shadow: 40px 0 60px rgba(0,0,0,0.5); }
+
+.gate-inner {
+  position: absolute; inset: 14px;
+  border: 1px solid var(--gold-soft);
+  border-radius: inherit;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.gate-panel {
+  position: relative;
+  width: 78%;
+  height: 78%;
+  border: 1px solid rgba(212,175,55,0.6);
+  border-radius: 50% 50% 4px 4px / 16% 16% 4px 4px;
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(212,175,55,0.04) 0 12px,
+      transparent 12px 24px);
+}
+
+.gate-medallion {
+  position: absolute;
+  left: 50%; top: 22%;
+  transform: translateX(-50%);
+  width: 86px; height: 86px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background:
+    radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.15), inset 0 0 0 6px rgba(212,175,55,0.2);
+}
+.gate-medallion::before {
+  content: "";
+  position: absolute; inset: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-soft);
+}
+.gate-medallion::after {
+  content: "✦";
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold-bright);
+  font-size: 22px;
+}
+
+.gate-medallion-sm {
+  top: 50%;
+  width: 56px; height: 56px;
+}
+.gate-medallion-sm::after { font-size: 14px; }
+
+.gate-medallion-bottom {
+  top: auto;
+  bottom: 14%;
+}
+
+.gate-knocker {
+  position: absolute;
+  left: 50%; bottom: 4%;
+  transform: translateX(-50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-bright);
+  background: radial-gradient(circle, var(--gold) 0%, #6b4f10 80%);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+}
+.gate-right .gate-knocker { left: 6%; transform: none; }
+.gate-left  .gate-knocker { left: auto; right: 6%; transform: none; }
+
+.gate-arch-top {
+  position: absolute;
+  top: 4%;
+  left: 8%; right: 8%;
+  height: 44px;
+  border-bottom: 1.5px solid var(--gold-soft);
+  border-radius: 100% 100% 0 0 / 100% 100% 0 0;
+}
+
+/* CTA over the gates */
+.gate-cta-anchor {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: min(560px, 88vw);
+  display: flex;
+  justify-content: center;
+}
+
+.gate-cta {
+  position: relative;
+  text-align: center;
+  padding: 50px 44px 44px;
+  width: 100%;
+  border-radius: 50% 50% 12px 12px / 22% 22% 12px 12px;
+  background:
+    linear-gradient(180deg, rgba(4,21,15,0.96) 0%, rgba(6,32,24,0.96) 100%);
+  border: 1.5px solid var(--gold);
+  box-shadow:
+    inset 0 0 0 4px rgba(0,0,0,0.4),
+    inset 0 0 0 6px var(--gold-soft),
+    0 30px 80px rgba(0,0,0,0.7),
+    0 0 60px rgba(212,175,55,0.25);
+}
+
+.gate-cta::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 24px; height: 24px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 24px var(--gold);
+}
+
+.bismillah-top {
+  font-family: "Amiri", serif;
+  font-size: clamp(20px, 3.4vw, 30px);
+  color: var(--gold-bright);
+  letter-spacing: 1px;
+  text-shadow: 0 0 18px rgba(212,175,55,0.45);
+  margin-bottom: 18px;
+}
+
+.invite-title {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: clamp(34px, 6vw, 64px);
+  color: var(--gold-bright);
+  letter-spacing: 6px;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.7);
+}
+
+.invite-sub {
+  font-style: italic;
+  color: var(--cream);
+  font-size: clamp(15px, 2vw, 19px);
+  letter-spacing: 1.5px;
+  opacity: 0.9;
+  margin-bottom: 28px;
+}
+
+.enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 60%, #a8821e 100%);
+  color: var(--emerald-900);
+  border: 1px solid #6b4f10;
+  border-radius: 999px;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 10px 30px rgba(212,175,55,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+.enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(212,175,55,0.5), inset 0 1px 0 rgba(255,255,255,0.6);
+  filter: brightness(1.05);
+}
+.enter-btn:active { transform: translateY(0); }
+
+.scroll-hint {
+  margin-top: 22px;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold-soft);
+  opacity: 0.75;
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* ---------- CONTENT ---------- */
+.content {
+  position: relative;
+  background:
+    linear-gradient(180deg, #04150f 0%, var(--emerald-900) 8%, var(--emerald-800) 50%, var(--emerald-900) 100%);
+  border-top: 1px solid rgba(212,175,55,0.3);
+}
+
+.arabesque {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  color: var(--gold);
+  opacity: 0.04;
+  z-index: 0;
+}
+
+.section {
+  position: relative;
+  padding: 110px 24px;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.section-inner {
+  max-width: 760px;
+  width: 100%;
+}
+
+.center { text-align: center; }
+
+/* dividers */
+.ornate-divider {
+  display: block;
+  margin: 28px auto;
+  width: 200px;
+  height: 28px;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+/* Bismillah section */
+.moon-star {
+  color: var(--gold-bright);
+  display: inline-flex;
+  margin-bottom: 22px;
+  filter: drop-shadow(0 0 12px rgba(212,175,55,0.35));
+}
+
+.bismillah {
+  font-family: "Amiri", serif;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--gold-bright);
+  letter-spacing: 1px;
+  line-height: 1.6;
+  text-shadow: 0 0 26px rgba(212,175,55,0.35);
+}
+
+.bismillah-trans {
+  font-style: italic;
+  color: var(--cream);
+  font-size: clamp(15px, 1.7vw, 18px);
+  margin-top: 8px;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+}
+
+.ayat {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.7;
+  color: var(--cream);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.ayat-ref {
+  margin-top: 14px;
+  color: var(--gold-soft);
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* announcement */
+.kicker {
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.invite-line {
+  font-size: clamp(17px, 2vw, 21px);
+  color: var(--cream);
+  opacity: 0.92;
+  font-style: italic;
+}
+.invite-line em { color: var(--gold-bright); font-style: normal; font-weight: 500; }
+
+.bride-name, .groom-name {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: clamp(56px, 11vw, 132px);
+  color: var(--gold-bright);
+  letter-spacing: 6px;
+  line-height: 1;
+  margin: 18px 0;
+  text-shadow:
+    0 4px 30px rgba(0,0,0,0.6),
+    0 0 28px rgba(212,175,55,0.25);
+}
+
+.amp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 6px 0;
+}
+.amp-line {
+  height: 1px; width: 64px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.amp-symbol {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 44px);
+  color: var(--gold-soft);
+}
+
+.couplet {
+  font-family: "Amiri", serif;
+  font-size: clamp(20px, 2.6vw, 28px);
+  color: var(--gold-bright);
+  margin-top: 8px;
+}
+.couplet-trans {
+  font-style: italic;
+  color: var(--cream);
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+/* date section / arch card */
+.arch-card {
+  position: relative;
+  margin: 0 auto;
+  padding: 70px 44px 56px;
+  max-width: 560px;
+  background:
+    linear-gradient(180deg, rgba(20,90,71,0.55) 0%, rgba(6,41,31,0.85) 100%);
+  border: 1.5px solid var(--gold);
+  border-radius: 50% 50% 12px 12px / 22% 22% 12px 12px;
+  box-shadow:
+    inset 0 0 0 4px rgba(0,0,0,0.3),
+    inset 0 0 0 6px var(--gold-soft),
+    0 30px 80px rgba(0,0,0,0.5);
+}
+
+.arch-card::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 30px; height: 30px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 30px var(--gold);
+}
+
+.small-label {
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.date-grand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.date-day {
+  font-family: "Cinzel", serif;
+  font-size: clamp(18px, 2vw, 22px);
+  letter-spacing: 6px;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+
+.date-numerals {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.date-num {
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: clamp(74px, 12vw, 132px);
+  color: var(--gold-bright);
+  line-height: 1;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.date-month-year {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-left: 1px solid var(--gold);
+  padding-left: 20px;
+}
+.date-month {
+  font-family: "Cinzel", serif;
+  font-size: clamp(20px, 2.4vw, 28px);
+  letter-spacing: 4px;
+  color: var(--cream);
+}
+.date-year {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: var(--gold-soft);
+  margin-top: 4px;
+}
+
+.time-line {
+  font-style: italic;
+  color: var(--cream);
+  opacity: 0.8;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.time-grand {
+  font-family: "Cinzel", serif;
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--gold-bright);
+  letter-spacing: 3px;
+  margin: 8px 0 6px;
+}
+.time-sub {
+  font-style: italic;
+  color: var(--cream);
+  opacity: 0.78;
+  font-size: 15px;
+}
+
+/* event card */
+.event-card {
+  margin: 0 auto;
+  padding: 48px 28px;
+  max-width: 560px;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(20,90,71,0.4) 0%, rgba(6,41,31,0.7) 100%);
+  position: relative;
+}
+.event-card::before, .event-card::after {
+  content: "";
+  position: absolute;
+  width: 16px; height: 16px;
+  border: 1px solid var(--gold-bright);
+}
+.event-card::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+.event-card::after  { bottom: -8px; right: -8px; border-left: none; border-top: none; }
+
+.event-emblem {
+  color: var(--gold-bright);
+  filter: drop-shadow(0 0 16px rgba(212,175,55,0.3));
+  margin-bottom: 14px;
+}
+.event-title {
+  font-family: "Cinzel", serif;
+  font-size: clamp(22px, 3.2vw, 32px);
+  color: var(--gold-bright);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin: 8px 0 14px;
+}
+.event-desc {
+  font-style: italic;
+  font-size: clamp(15px, 1.8vw, 19px);
+  color: var(--cream);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* closing */
+.closing { padding-bottom: 140px; }
+.dua {
+  font-family: "Amiri", serif;
+  font-size: clamp(20px, 2.8vw, 28px);
+  color: var(--gold-bright);
+  line-height: 1.8;
+  text-shadow: 0 0 18px rgba(212,175,55,0.25);
+}
+.dua-trans {
+  font-style: italic;
+  color: var(--cream);
+  opacity: 0.88;
+  font-size: clamp(15px, 1.8vw, 18px);
+  margin-top: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signoff {
+  margin-top: 36px;
+  font-style: italic;
+  color: var(--cream);
+  opacity: 0.82;
+  font-size: 16px;
+}
+.family {
+  font-family: "Cinzel", serif;
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--gold-bright);
+  letter-spacing: 4px;
+  margin-top: 6px;
+}
+.crown {
+  margin-top: 32px;
+  color: var(--gold-bright);
+  display: inline-flex;
+  filter: drop-shadow(0 0 14px rgba(212,175,55,0.4));
+}
+
+.footer {
+  text-align: center;
+  padding: 30px 20px 40px;
+  border-top: 1px solid rgba(212,175,55,0.25);
+  background: rgba(0,0,0,0.25);
+}
+.footer p {
+  font-family: "Amiri", serif;
+  color: var(--gold-soft);
+  font-size: clamp(15px, 1.8vw, 19px);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* ---------- responsive tweaks ---------- */
+@media (max-width: 640px) {
+  .section { padding: 80px 20px; }
+  .arch-card { padding: 56px 22px 44px; }
+  .date-numerals { gap: 14px; }
+  .date-month-year { padding-left: 12px; }
+  .gate-medallion { width: 60px; height: 60px; }
+  .gate-medallion-sm { width: 36px; height: 36px; }
+  .invite-title { letter-spacing: 3px; }
+  .bride-name, .groom-name { letter-spacing: 4px; }
+
+  /* Keep gates from stretching into tall thin slivers on phones */
+  .gates-wrapper,
+  .hero-arch-frame {
+    width: min(92vw, 460px);
+    height: min(70vh, calc(min(92vw, 460px) * 1.05));
+  }
+  .gate-panel { width: 82%; height: 82%; }
+  .gate-medallion { top: 18%; }
+  .gate-medallion-sm { top: 46%; }
+  .gate-medallion-bottom { bottom: 12%; }
+  .gate-knocker { width: 30px; height: 30px; }
+  .gate-arch-top { height: 32px; }
+  .gate-cta { padding: 32px 22px 28px; }
+}
+
+@media (max-width: 420px) {
+  .gates-wrapper,
+  .hero-arch-frame {
+    width: 92vw;
+    height: min(64vh, calc(92vw * 1));
+  }
+  .gate-medallion { width: 48px; height: 48px; }
+  .gate-medallion-sm { width: 28px; height: 28px; }
+  .gate-medallion::after { font-size: 16px; }
+  .gate-medallion-sm::after { font-size: 10px; }
+  .invite-title { letter-spacing: 2px; }
+  .bismillah-top { font-size: 18px; }
+  .invite-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 18px; }
+  .enter-btn { padding: 11px 22px; font-size: 12px; letter-spacing: 2px; }
+}
+
+
+/* ============================================================
+   REVEAL PANEL — visible inside doorway when gates open
+   ============================================================ */
+.reveal-panel-anchor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;            /* under the still-visible gates so they hide it until they swing */
+  pointer-events: none;
+}
+
+.reveal-panel {
+  pointer-events: auto;
+  width: min(640px, 92vw);
+  text-align: center;
+  padding: 36px 28px;
+  position: relative;
+}
+
+.reveal-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.reveal-panel .moon-star {
+  color: var(--gold-bright);
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 14px rgba(212,175,55,0.5));
+}
+
+.reveal-kicker {
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin: 0 0 6px;
+}
+
+.reveal-panel .bride-name,
+.reveal-panel .groom-name {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: clamp(48px, 9vw, 96px);
+  letter-spacing: 6px;
+  line-height: 1;
+  margin: 4px 0;
+  text-shadow:
+    0 4px 30px rgba(0,0,0,0.7),
+    0 0 28px rgba(212,175,55,0.25);
+}
+
+.reveal-panel .amp {
+  margin: 6px 0;
+}
+
+.reveal-panel .ornate-divider {
+  margin: 18px auto;
+  color: var(--gold);
+}
+
+.reveal-meta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(15px, 1.8vw, 19px);
+  color: var(--cream);
+  margin: 8px 0 4px;
+}
+.meta-strong {
+  font-style: normal;
+  font-family: "Cinzel", serif;
+  font-size: clamp(13px, 1.5vw, 15px);
+  letter-spacing: 3px;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+.meta-dot { color: var(--gold); opacity: 0.7; }
+
+.reveal-venue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: "Cinzel", serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+}
+.reveal-venue svg { color: var(--gold-bright); }
+
+.scroll-cta {
+  margin-top: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-bright);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, transform .25s ease;
+}
+.scroll-cta:hover {
+  background: rgba(212,175,55,0.12);
+  color: #fff7d6;
+}
+
+/* ============================================================
+   VENUE section
+   ============================================================ */
+.venue-card {
+  position: relative;
+  max-width: 560px;
+  margin: 24px auto 0;
+  padding: 44px 32px 40px;
+  border: 1px solid var(--gold);
+  border-radius: 50% 50% 8px 8px / 18% 18% 8px 8px;
+  background:
+    linear-gradient(180deg, rgba(20,90,71,0.4) 0%, rgba(6,41,31,0.7) 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(0,0,0,0.3),
+    inset 0 0 0 5px var(--gold-soft),
+    0 30px 60px rgba(0,0,0,0.4);
+}
+
+.venue-mosque {
+  color: var(--gold-bright);
+  display: inline-flex;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 18px rgba(212,175,55,0.35));
+}
+
+.venue-name {
+  font-family: "Cinzel", serif;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: 5px;
+  color: var(--gold-bright);
+  margin: 6px 0 2px;
+}
+.venue-city {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--cream);
+  letter-spacing: 2px;
+  margin: 0 0 16px;
+}
+.venue-note {
+  font-style: italic;
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--cream);
+  opacity: 0.82;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Hide floating hearts that sit inside reveal-inner from breaking layout */
+.reveal-inner .hearts-layer {
+  position: absolute;
+  inset: -20% -10%;
+  z-index: -1;
+}
+
+/* ============================================================
+   DINNER / WALIMA section
+   ============================================================ */
+.dinner-card {
+  position: relative;
+  max-width: 560px;
+  margin: 24px auto 0;
+  padding: 48px 32px 44px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(20,90,71,0.4) 0%, rgba(6,41,31,0.7) 100%);
+  box-shadow:
+    inset 0 0 0 3px rgba(0,0,0,0.3),
+    inset 0 0 0 5px var(--gold-soft),
+    0 30px 60px rgba(0,0,0,0.4);
+}
+.dinner-card::before, .dinner-card::after {
+  content: "";
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--gold-bright);
+}
+.dinner-card::before { top: -9px; left: -9px; border-right: none; border-bottom: none; }
+.dinner-card::after  { bottom: -9px; right: -9px; border-left: none; border-top: none; }
+
+.dinner-emblem {
+  color: var(--gold-bright);
+  display: inline-flex;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 16px rgba(212,175,55,0.35));
+}
+
+.dinner-title {
+  font-family: "Cinzel", serif;
+  font-size: clamp(22px, 3.2vw, 32px);
+  color: var(--gold-bright);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin: 4px 0 14px;
+}
+
+.dinner-time {
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4.2vw, 44px);
+  letter-spacing: 4px;
+  color: var(--gold-bright);
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  margin: 6px 0 18px;
+}
+
+.dinner-venue-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border: 1px solid rgba(212,175,55,0.5);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.25);
+  font-family: "Cinzel", serif;
+  font-size: clamp(13px, 1.6vw, 15px);
+  letter-spacing: 3px;
+  color: var(--cream);
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+.dinner-venue-row svg { color: var(--gold-bright); }
+
+.dinner-note {
+  font-style: italic;
+  font-size: clamp(14px, 1.6vw, 17px);
+  color: var(--cream);
+  opacity: 0.85;
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
