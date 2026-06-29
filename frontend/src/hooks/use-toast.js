@@ -143,7 +143,10 @@ function useToast() {
         listeners.splice(index, 1)
       }
     };
-  }, [state])
+    // setState from useState is stable; we subscribe once on mount and
+    // unsubscribe on unmount. The previous [state] dep caused duplicate
+    // listeners on every state change.
+  }, [])
 
   return {
     ...state,
