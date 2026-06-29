@@ -342,6 +342,62 @@ const Home = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const addToCalendar = () => {
+    // 25 Dec 2026, India (UTC+5:30). Asr in Karwar in Dec ≈ 16:00 local.
+    // Event: Nikah after Asr → Walima dinner until 22:00.
+    // Stored in UTC: 16:00 IST = 10:30 UTC, 22:00 IST = 16:30 UTC.
+    const dtStart = "20261225T103000Z";
+    const dtEnd = "20261225T163000Z";
+    const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Saniya weds Mubeen//Wedding//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      "UID:saniya-mubeen-nikah-2026@invite",
+      `DTSTAMP:${dtStamp}`,
+      `DTSTART:${dtStart}`,
+      `DTEND:${dtEnd}`,
+      "SUMMARY:Saniya weds Mubeen — Nikah & Walima",
+      "LOCATION:Badi Masjid\\, Karwar (Nikah) • Gulshan Baug (Dinner)",
+      "DESCRIPTION:Nikah ceremony after Ṣalāt-ul-ʿAṣr at Badi Masjid\\, Karwar.\\nWalima dinner from 7:00 PM onwards at Gulshan Baug.\\nYour duʿās and presence are our greatest gift.",
+      "STATUS:CONFIRMED",
+      "BEGIN:VALARM",
+      "TRIGGER:-P1D",
+      "ACTION:DISPLAY",
+      "DESCRIPTION:Saniya & Mubeen's Nikah tomorrow",
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+
+    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Saniya-weds-Mubeen.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const openGoogleCalendar = () => {
+    const start = "20261225T103000Z";
+    const end = "20261225T163000Z";
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: "Saniya weds Mubeen — Nikah & Walima",
+      dates: `${start}/${end}`,
+      details:
+        "Nikah ceremony after Ṣalāt-ul-ʿAṣr at Badi Masjid, Karwar. Walima dinner from 7:00 PM onwards at Gulshan Baug.",
+      location: "Badi Masjid, Karwar • Gulshan Baug",
+    });
+    window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, "_blank", "noopener");
+  };
+
   useEffect(() => {
     document.title = "Saniya weds Mubeen — A Royal Nikah";
   }, []);
@@ -536,6 +592,31 @@ const Home = () => {
               <p className="dinner-note">
                 Kindly join us for a feast of celebration following the Nikah ceremony. Your presence will complete our joy.
               </p>
+              <div className="calendar-actions">
+                <button
+                  type="button"
+                  className="cal-btn cal-btn-primary"
+                  data-testid="add-to-calendar-btn"
+                  onClick={addToCalendar}
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18 M8 3v4 M16 3v4 M12 13v5 M9.5 15.5h5" />
+                  </svg>
+                  <span>Add to Calendar</span>
+                </button>
+                <button
+                  type="button"
+                  className="cal-btn cal-btn-ghost"
+                  data-testid="add-to-google-calendar-btn"
+                  onClick={openGoogleCalendar}
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                    <path d="M5 12h14 M13 6l6 6-6 6" />
+                  </svg>
+                  <span>Google Calendar</span>
+                </button>
+              </div>
             </div>
           </motion.div>
         </Section>
