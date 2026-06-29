@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import "@/App.css";
 
+const MAP_URL = "https://maps.app.goo.gl/n4ComNLeAwLZ63vd8";
+
 const NASHEED_URL = "https://archive.org/download/y-2mate.com-new-wedding-nasheed-music-free-muhammad-al-muqit/y2mate.com%20-%20New%20Wedding%20Nasheed%20Music%20Free%20%D9%85%D8%AD%D9%85%D8%AF%20%D8%A7%D9%84%D9%85%D9%82%D9%8A%D8%B7%20%D8%B9%D8%B1%D9%88%D8%B3%D8%A9%20%D8%A7%D9%84%D9%86%D9%88%D8%B1%20Muhammad%20al%20Muqit.mp3";
 
 const HeartIcon = ({ size = 22 }) => (
@@ -554,6 +556,19 @@ const Home = () => {
               <p className="venue-note">
                 Please join us at the masjid following the Aṣr prayer for the Nikah ceremony.
               </p>
+              <a
+                href={MAP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-link"
+                data-testid="venue-map-link"
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z" />
+                  <circle cx="12" cy="9" r="2.6" />
+                </svg>
+                <span>View on Google Maps</span>
+              </a>
             </div>
           </motion.div>
         </Section>
@@ -582,13 +597,22 @@ const Home = () => {
               </div>
               <p className="dinner-title" data-testid="dinner-title">Dinner Reception</p>
               <p className="dinner-time" data-testid="dinner-time">7:00 PM Onwards</p>
-              <div className="dinner-venue-row">
+              <a
+                href={MAP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dinner-venue-row dinner-venue-link"
+                data-testid="dinner-venue"
+              >
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                   <path d="M12 2 L4 8 v12 h5 v-7 h6 v7 h5 V8 z" />
                   <path d="M12 2 v3 M10 4 h4" />
                 </svg>
-                <span data-testid="dinner-venue">Gulshan Baug</span>
-              </div>
+                <span>Gulshan Baug</span>
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" style={{ opacity: 0.75 }}>
+                  <path d="M7 17L17 7 M9 7h8v8" />
+                </svg>
+              </a>
               <p className="dinner-note">
                 Kindly join us for a feast of celebration following the Nikah ceremony. Your presence will complete our joy.
               </p>

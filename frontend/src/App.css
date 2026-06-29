@@ -1001,6 +1001,41 @@ html, body {
   line-height: 1.7;
 }
 
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  padding: 10px 22px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold-bright);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .3s ease, color .3s ease, transform .25s ease, box-shadow .3s ease;
+}
+.map-link:hover {
+  background: rgba(212,175,55,0.12);
+  color: #fff7d6;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.4), 0 0 18px rgba(212,175,55,0.25);
+}
+
+.dinner-venue-link {
+  text-decoration: none;
+  transition: background .3s ease, color .3s ease, transform .25s ease, border-color .3s ease;
+}
+.dinner-venue-link:hover {
+  background: rgba(212,175,55,0.14);
+  color: #fff7d6;
+  border-color: var(--gold-bright);
+  transform: translateY(-1px);
+}
+
 /* Hide floating hearts that sit inside reveal-inner from breaking layout */
 .reveal-inner .hearts-layer {
   position: absolute;
