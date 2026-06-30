@@ -172,6 +172,78 @@ export const VenueSection = () => (
 
 const EXTERNAL_LINK_STYLE = { opacity: 0.75 };
 
+const DinnerEmblem = () => (
+  <div className="dinner-emblem" aria-hidden="true">
+    <svg viewBox="0 0 80 80" width="72" height="72">
+      <g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
+        <path d="M20 40 a20 20 0 0 1 40 0" />
+        <path d="M14 44 H66" />
+        <path d="M40 40 v-10" />
+        <path d="M36 30 a4 4 0 0 1 8 0" />
+        <path d="M18 50 q22 14 44 0" />
+        <circle cx="40" cy="62" r="1.5" fill="currentColor" />
+        <path d="M30 16 v6 M40 12 v8 M50 16 v6" />
+      </g>
+    </svg>
+  </div>
+);
+
+const DinnerVenueLink = () => (
+  <a
+    href={MAP_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="dinner-venue-row dinner-venue-link"
+    data-testid="dinner-venue"
+  >
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <path d="M12 2 L4 8 v12 h5 v-7 h6 v7 h5 V8 z" />
+      <path d="M12 2 v3 M10 4 h4" />
+    </svg>
+    <span>Gulshan Baug</span>
+    <svg
+      viewBox="0 0 24 24"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+      style={EXTERNAL_LINK_STYLE}
+    >
+      <path d="M7 17L17 7 M9 7h8v8" />
+    </svg>
+  </a>
+);
+
+const CalendarButtons = () => (
+  <div className="calendar-actions">
+    <button
+      type="button"
+      className="cal-btn cal-btn-primary"
+      data-testid="add-to-calendar-btn"
+      onClick={downloadIcs}
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M3 9h18 M8 3v4 M16 3v4 M12 13v5 M9.5 15.5h5" />
+      </svg>
+      <span>Add to Calendar</span>
+    </button>
+    <button
+      type="button"
+      className="cal-btn cal-btn-ghost"
+      data-testid="add-to-google-calendar-btn"
+      onClick={openGoogleCalendar}
+    >
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+        <path d="M5 12h14 M13 6l6 6-6 6" />
+      </svg>
+      <span>Google Calendar</span>
+    </button>
+  </div>
+);
+
 export const DinnerSection = () => (
   <Section testId="dinner-section" className="center dinner-section">
     <motion.div
@@ -182,64 +254,15 @@ export const DinnerSection = () => (
     >
       <p className="small-label">Walima Dinner</p>
       <div className="dinner-card">
-        <div className="dinner-emblem" aria-hidden="true">
-          <svg viewBox="0 0 80 80" width="72" height="72">
-            <g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
-              <path d="M20 40 a20 20 0 0 1 40 0" />
-              <path d="M14 44 H66" />
-              <path d="M40 40 v-10" />
-              <path d="M36 30 a4 4 0 0 1 8 0" />
-              <path d="M18 50 q22 14 44 0" />
-              <circle cx="40" cy="62" r="1.5" fill="currentColor" />
-              <path d="M30 16 v6 M40 12 v8 M50 16 v6" />
-            </g>
-          </svg>
-        </div>
+        <DinnerEmblem />
         <p className="dinner-title" data-testid="dinner-title">Dinner Reception</p>
         <p className="dinner-time" data-testid="dinner-time">7:00 PM Onwards</p>
-        <a
-          href={MAP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="dinner-venue-row dinner-venue-link"
-          data-testid="dinner-venue"
-        >
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-            <path d="M12 2 L4 8 v12 h5 v-7 h6 v7 h5 V8 z" />
-            <path d="M12 2 v3 M10 4 h4" />
-          </svg>
-          <span>Gulshan Baug</span>
-          <svg
-            viewBox="0 0 24 24"
-            width="12"
-            height="12"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            aria-hidden="true"
-            style={EXTERNAL_LINK_STYLE}
-          >
-            <path d="M7 17L17 7 M9 7h8v8" />
-          </svg>
-        </a>
+        <DinnerVenueLink />
         <p className="dinner-note">
           Kindly join us for a feast of celebration following the Nikah ceremony.
           Your presence will complete our joy.
         </p>
-        <div className="calendar-actions">
-          
-          <button
-            type="button"
-            className="cal-btn cal-btn-ghost"
-            data-testid="add-to-google-calendar-btn"
-            onClick={openGoogleCalendar}
-          >
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-              <path d="M5 12h14 M13 6l6 6-6 6" />
-            </svg>
-            <span>Google Calendar</span>
-          </button>
-        </div>
+        <CalendarButtons />
       </div>
     </motion.div>
   </Section>
