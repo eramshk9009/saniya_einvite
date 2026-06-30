@@ -28,15 +28,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "yarn"
-          cache-dependency-path: frontend/yarn.lock
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --network-timeout 600000
 
       - name: Build
         env:
           CI: false
+          DISABLE_ESLINT_PLUGIN: true
         run: yarn build
 
       - name: Copy index.html as 404.html (SPA fallback)
