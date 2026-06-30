@@ -252,7 +252,7 @@ export const DinnerSection = () => (
       viewport={VIEWPORT_ONCE}
       transition={TRANSITION_1}
     >
-      <p className="small-label">Walima Dinner</p>
+      <p className="small-label">Dinner</p>
       <div className="dinner-card">
         <DinnerEmblem />
         <p className="dinner-title" data-testid="dinner-title">Dinner Reception</p>
