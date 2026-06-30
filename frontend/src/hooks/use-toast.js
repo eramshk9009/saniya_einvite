@@ -136,6 +136,20 @@ function useToast() {
   const [state, setState] = React.useState(memoryState)
 
   React.useEffect(() => {
+    // Subscribe-once pattern. The dependency array MUST be empty here.
+    //
+    // Why each variable is NOT a dependency:
+    //   • `setState` — returned from useState, guaranteed stable across renders
+    //     (https://react.dev/reference/react/useState#setstate). Adding it is a no-op.
+    //   • `listeners` — module-scope array (defined outside the component), not a
+    //     reactive value. React only tracks reactive values; module-level vars are
+    //     intentionally excluded from the deps lint rule.
+    //   • `index` — local variable declared INSIDE the cleanup function. It is
+    //     not in scope for the effect body and cannot be a dependency.
+    //
+    // Any deps other than `[]` (including `[state]`) re-runs the effect on every
+    // state change, which double-subscribes this listener and causes duplicate
+    // toast renders. Do not "fix" this to `[index, listeners, setState]`.
     listeners.push(setState)
     return () => {
       const index = listeners.indexOf(setState)
@@ -143,9 +157,6 @@ function useToast() {
         listeners.splice(index, 1)
       }
     };
-    // setState from useState is stable; we subscribe once on mount and
-    // unsubscribe on unmount. The previous [state] dep caused duplicate
-    // listeners on every state change.
   }, [])
 
   return {

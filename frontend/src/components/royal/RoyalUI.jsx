@@ -150,62 +150,68 @@ const GatePanel = () => (
   </div>
 );
 
-export const PalaceGates = ({ onEnter, opened }) => (
-  <div className="gates-wrapper" data-testid="palace-gates">
-    <div className={`gate gate-left ${opened ? "gate-open" : ""}`}>
-      <GatePanel />
-    </div>
-    <div className={`gate gate-right ${opened ? "gate-open" : ""}`}>
-      <GatePanel />
-    </div>
+const ChevronRightIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+);
 
-    <AnimatePresence>
-      {!opened && (
-        <div className="gate-cta-anchor">
-          <motion.div
-            className="gate-cta"
-            initial={GATE_CTA_INITIAL}
-            animate={GATE_CTA_ANIMATE}
-            exit={GATE_CTA_EXIT}
-            transition={GATE_CTA_TRANSITION}
-          >
-            <motion.div
-              className="bismillah-top"
-              lang="ar"
-              animate={GLOW_TEXT_SHADOW_TOP}
-              transition={GLOW_TRANSITION_4}
-            >
-              بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم
-            </motion.div>
-            <h1 className="invite-title">A Royal Invitation</h1>
-            <p className="invite-sub">
-              The honour of your presence is humbly requested
-            </p>
-            <motion.button
-              data-testid="enter-palace-btn"
-              onClick={onEnter}
-              className="enter-btn"
-              whileHover={ENTER_BTN_HOVER}
-              whileTap={ENTER_BTN_TAP}
-            >
-              <span>Enter the Palace</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </motion.button>
-            <motion.p
-              className="scroll-hint"
-              animate={SCROLL_HINT_ANIMATE}
-              transition={SCROLL_HINT_TRANSITION}
-            >
-              Knock the doors to begin
-            </motion.p>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+const GateCTA = ({ onEnter }) => (
+  <div className="gate-cta-anchor">
+    <motion.div
+      className="gate-cta"
+      initial={GATE_CTA_INITIAL}
+      animate={GATE_CTA_ANIMATE}
+      exit={GATE_CTA_EXIT}
+      transition={GATE_CTA_TRANSITION}
+    >
+      <motion.div
+        className="bismillah-top"
+        lang="ar"
+        animate={GLOW_TEXT_SHADOW_TOP}
+        transition={GLOW_TRANSITION_4}
+      >
+        بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْم
+      </motion.div>
+      <h1 className="invite-title">A Royal Invitation</h1>
+      <p className="invite-sub">
+        The honour of your presence is humbly requested
+      </p>
+      <motion.button
+        data-testid="enter-palace-btn"
+        onClick={onEnter}
+        className="enter-btn"
+        whileHover={ENTER_BTN_HOVER}
+        whileTap={ENTER_BTN_TAP}
+      >
+        <span>Enter the Palace</span>
+        <ChevronRightIcon />
+      </motion.button>
+      <motion.p
+        className="scroll-hint"
+        animate={SCROLL_HINT_ANIMATE}
+        transition={SCROLL_HINT_TRANSITION}
+      >
+        Knock the doors to begin
+      </motion.p>
+    </motion.div>
   </div>
 );
+
+export const PalaceGates = ({ onEnter, opened }) => {
+  const openedClass = opened ? "gate-open" : "";
+  return (
+    <div className="gates-wrapper" data-testid="palace-gates">
+      <div className={`gate gate-left ${openedClass}`}>
+        <GatePanel />
+      </div>
+      <div className={`gate gate-right ${openedClass}`}>
+        <GatePanel />
+      </div>
+      <AnimatePresence>{!opened && <GateCTA onEnter={onEnter} />}</AnimatePresence>
+    </div>
+  );
+};
 
 const REVEAL_PANEL_INITIAL = { opacity: 0, scale: 0.94 };
 const REVEAL_PANEL_ANIMATE = {
@@ -224,16 +230,109 @@ const revealItemVariants = {
   }),
 };
 
-const RevealItem = ({ custom, children, className }) => (
-  <motion.div
-    className={className}
-    variants={revealItemVariants}
-    custom={custom}
-    initial="hidden"
-    animate="show"
+const RevealItem = ({ custom, children, className, as = "div" }) => {
+  const Tag = motion[as];
+  return (
+    <Tag
+      className={className}
+      variants={revealItemVariants}
+      custom={custom}
+      initial="hidden"
+      animate="show"
+    >
+      {children}
+    </Tag>
+  );
+};
+
+const MoonStarIcon = () => (
+  <svg viewBox="0 0 80 80" width="56" height="56">
+    <path
+      d="M50 12a28 28 0 1 0 0 56 22 22 0 1 1 0-56z"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <path
+      d="M62 38 l3.5 7.5 L73 47 l-5.5 5 1.3 7.5L62 56l-6.8 3.5L56.5 52 51 47l7.5-1.5z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+const MosqueIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    aria-hidden="true"
   >
-    {children}
-  </motion.div>
+    <path d="M12 2 L4 8 v12 h5 v-7 h6 v7 h5 V8 z" />
+    <path d="M12 2 v3 M10 4 h4" />
+  </svg>
+);
+
+const RevealNames = () => (
+  <>
+    <RevealItem as="h2" custom={2} className="bride-name shimmer">
+      <span data-testid="bride-name">Saniya</span>
+    </RevealItem>
+
+    <RevealItem custom={3} className="amp">
+      <span className="amp-line" />
+      <motion.span
+        className="amp-symbol amp-heart"
+        animate={HEART_PULSE}
+        transition={HEART_PULSE_TRANSITION}
+      >
+        <HeartIcon size={28} />
+      </motion.span>
+      <span className="amp-line" />
+    </RevealItem>
+
+    <RevealItem as="h2" custom={4} className="groom-name shimmer">
+      <span data-testid="groom-name">Mubeen</span>
+    </RevealItem>
+  </>
+);
+
+const RevealDetails = ({ onScroll }) => (
+  <>
+    <RevealItem as="p" custom={6} className="reveal-meta">
+      <span className="meta-strong">Friday, 25 December 2026</span>
+      <span className="meta-dot">•</span>
+      <span>After Ṣalāt-ul-ʿAṣr</span>
+    </RevealItem>
+
+    <RevealItem as="p" custom={6.5} className="reveal-venue">
+      <MosqueIcon />
+      <span>Badi Masjid, Karwar</span>
+    </RevealItem>
+
+    <motion.button
+      type="button"
+      className="scroll-cta"
+      data-testid="scroll-more-btn"
+      onClick={onScroll}
+      variants={revealItemVariants}
+      custom={7}
+      initial="hidden"
+      animate="show"
+      whileHover={SCROLL_CTA_HOVER}
+    >
+      <span>Scroll for the full invitation</span>
+      <motion.span
+        animate={SCROLL_ARROW_ANIMATE}
+        transition={HEART_PULSE_TRANSITION}
+        aria-hidden
+      >
+        ↓
+      </motion.span>
+    </motion.button>
+  </>
 );
 
 export const RevealPanel = ({ show, onScroll }) => (
@@ -249,124 +348,17 @@ export const RevealPanel = ({ show, onScroll }) => (
         >
           <div className="reveal-inner">
             <RevealItem custom={0} className="moon-star">
-              <svg viewBox="0 0 80 80" width="56" height="56">
-                <path
-                  d="M50 12a28 28 0 1 0 0 56 22 22 0 1 1 0-56z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                />
-                <path
-                  d="M62 38 l3.5 7.5 L73 47 l-5.5 5 1.3 7.5L62 56l-6.8 3.5L56.5 52 51 47l7.5-1.5z"
-                  fill="currentColor"
-                />
-              </svg>
+              <MoonStarIcon />
             </RevealItem>
-
-            <motion.p
-              className="reveal-kicker"
-              variants={revealItemVariants}
-              custom={1}
-              initial="hidden"
-              animate="show"
-            >
+            <RevealItem as="p" custom={1} className="reveal-kicker">
               With the blessings of Allah ﷻ
-            </motion.p>
-
-            <motion.h2
-              className="bride-name shimmer"
-              data-testid="bride-name"
-              variants={revealItemVariants}
-              custom={2}
-              initial="hidden"
-              animate="show"
-            >
-              Saniya
-            </motion.h2>
-
-            <RevealItem custom={3} className="amp">
-              <span className="amp-line" />
-              <motion.span
-                className="amp-symbol amp-heart"
-                animate={HEART_PULSE}
-                transition={HEART_PULSE_TRANSITION}
-              >
-                <HeartIcon size={28} />
-              </motion.span>
-              <span className="amp-line" />
             </RevealItem>
-
-            <motion.h2
-              className="groom-name shimmer"
-              data-testid="groom-name"
-              variants={revealItemVariants}
-              custom={4}
-              initial="hidden"
-              animate="show"
-            >
-              Mubeen
-            </motion.h2>
-
+            <RevealNames />
             <FloatingHearts />
-
             <RevealItem custom={5}>
               <Ornate />
             </RevealItem>
-
-            <motion.p
-              className="reveal-meta"
-              variants={revealItemVariants}
-              custom={6}
-              initial="hidden"
-              animate="show"
-            >
-              <span className="meta-strong">Friday, 25 December 2026</span>
-              <span className="meta-dot">•</span>
-              <span>After Ṣalāt-ul-ʿAṣr</span>
-            </motion.p>
-
-            <motion.p
-              className="reveal-venue"
-              variants={revealItemVariants}
-              custom={6.5}
-              initial="hidden"
-              animate="show"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                aria-hidden="true"
-              >
-                <path d="M12 2 L4 8 v12 h5 v-7 h6 v7 h5 V8 z" />
-                <path d="M12 2 v3 M10 4 h4" />
-              </svg>
-              <span>Badi Masjid, Karwar</span>
-            </motion.p>
-
-            <motion.button
-              type="button"
-              className="scroll-cta"
-              data-testid="scroll-more-btn"
-              onClick={onScroll}
-              variants={revealItemVariants}
-              custom={7}
-              initial="hidden"
-              animate="show"
-              whileHover={SCROLL_CTA_HOVER}
-            >
-              <span>Scroll for the full invitation</span>
-              <motion.span
-                animate={SCROLL_ARROW_ANIMATE}
-                transition={HEART_PULSE_TRANSITION}
-                aria-hidden
-              >
-                ↓
-              </motion.span>
-            </motion.button>
+            <RevealDetails onScroll={onScroll} />
           </div>
         </motion.div>
       </div>
