@@ -227,18 +227,7 @@ export const DinnerSection = () => (
           Your presence will complete our joy.
         </p>
         <div className="calendar-actions">
-          <button
-            type="button"
-            className="cal-btn cal-btn-primary"
-            data-testid="add-to-calendar-btn"
-            onClick={downloadIcs}
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-              <rect x="3" y="5" width="18" height="16" rx="2" />
-              <path d="M3 9h18 M8 3v4 M16 3v4 M12 13v5 M9.5 15.5h5" />
-            </svg>
-            <span>Add to Calendar</span>
-          </button>
+          
           <button
             type="button"
             className="cal-btn cal-btn-ghost"
