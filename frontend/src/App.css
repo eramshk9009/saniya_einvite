@@ -329,10 +329,10 @@ html, body {
 /* CTA over the gates */
 .gate-cta-anchor {
   position: absolute;
-  left: 50%; top: 50%;
+  left: 50%; top: 46%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  width: min(560px, 88vw);
+  width: min(560px, 82vw);
   display: flex;
   justify-content: center;
 }
@@ -808,7 +808,16 @@ html, body {
   .gate-medallion-bottom { bottom: 12%; }
   .gate-knocker { width: 30px; height: 30px; }
   .gate-arch-top { height: 32px; }
-  .gate-cta { padding: 32px 22px 28px; }
+
+  /* Position invitation board in upper area so both doors with medallions are clearly visible at the bottom */
+  .gate-cta-anchor { top: 42%; width: min(360px, 74vw); }
+  .gate-cta { padding: 24px 18px 22px; border-radius: 50% 50% 10px 10px / 18% 18% 10px 10px; }
+  .gate-cta::before { width: 16px; height: 16px; }
+  .bismillah-top { font-size: 16px; margin-bottom: 10px; }
+  .invite-title { font-size: clamp(24px, 7.5vw, 36px); letter-spacing: 3px; margin-bottom: 6px; }
+  .invite-sub { font-size: 12px; letter-spacing: 1px; margin-bottom: 16px; }
+  .enter-btn { padding: 10px 22px; font-size: 12px; letter-spacing: 2px; }
+  .scroll-hint { font-size: 10px; margin-top: 10px; }
 
   /* --- shrink reveal panel content to fit inside the arch frame --- */
   .reveal-panel { padding: 18px 16px; width: min(420px, 92vw); }
@@ -847,10 +856,12 @@ html, body {
   .gate-medallion-sm { width: 28px; height: 28px; }
   .gate-medallion::after { font-size: 16px; }
   .gate-medallion-sm::after { font-size: 10px; }
-  .invite-title { letter-spacing: 2px; }
-  .bismillah-top { font-size: 18px; }
-  .invite-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 18px; }
-  .enter-btn { padding: 11px 22px; font-size: 12px; letter-spacing: 2px; }
+  .invite-title { letter-spacing: 2px; font-size: clamp(22px, 7vw, 32px); }
+  .bismillah-top { font-size: 14px; margin-bottom: 8px; }
+  .invite-sub { font-size: 11.5px; letter-spacing: 1px; margin-bottom: 14px; }
+  .enter-btn { padding: 9px 20px; font-size: 11px; letter-spacing: 2px; }
+  .gate-cta-anchor { top: 42%; width: min(320px, 76vw); }
+  .gate-cta { padding: 20px 14px 18px; }
 
   /* extra-tight reveal content for very small phones */
   .reveal-panel { padding: 14px 12px; }
